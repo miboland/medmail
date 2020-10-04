@@ -1,65 +1,103 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useState } from "react";
+import { NextSeo } from "next-seo";
+import {
+  useColorMode,
+  Heading,
+  Text,
+  Flex,
+  Stack,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Icon,
+} from "@chakra-ui/core";
 
-export default function Home() {
+import Container from "../components/Container";
+import ReportCard from "../components/ReportCard";
+import getReports from "../utils/reporting";
+
+const title = "Medmail";
+
+const Dashboard = ({ reports }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const { colorMode } = useColorMode();
+  const secondaryTextColor = {
+    light: "gray.700",
+    dark: "gray.400",
+  };
+
+  const filteredReports = reports.filter((report) =>
+    report.body.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <NextSeo
+        title={title}
+        openGraph={{
+          title,
+        }}
+      />
+      <Container>
+        <Stack
+          as="main"
+          spacing={8}
+          justifyContent="center"
+          alignItems="flex-start"
+          m="0 auto 4rem auto"
+          maxWidth="700px"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+          <Flex
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            maxWidth="700px"
+          >
+            <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
+              Reports
+            </Heading>
+            <Text color={secondaryTextColor[colorMode]}>
+              {`Displaying ${filteredReports.length} of ${reports.length} total medical reports.`}
+            </Text>
+            <InputGroup my={4} mr={4} w="100%">
+              <Input
+                aria-label="Search reports"
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Search reports"
+              />
+              <InputRightElement>
+                <Icon name="search" color="gray.300" />
+              </InputRightElement>
+            </InputGroup>
+          </Flex>
+          <Flex
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            maxWidth="700px"
+            mt={8}
+          >
+            <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
+              {filteredReports.length !== reports.length &&
+                `Reports Containing "${searchValue}"`}
+              {filteredReports.length === reports.length && "All Reports"}
+            </Heading>
+            {!filteredReports.length && "No reports found."}
+            {filteredReports.map((report) => (
+              <ReportCard key={report.title} {...report} />
+            ))}
+          </Flex>
+        </Stack>
+      </Container>
+    </>
+  );
+};
+
+Dashboard.getInitialProps = async (ctx) => {
+  const reports = await getReports();
+  return {
+    reports,
+  };
+};
+
+export default Dashboard;
