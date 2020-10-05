@@ -1,5 +1,7 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
+import { StoreProvider } from "easy-peasy";
+import { store } from "../store/store";
 import {
   ThemeProvider,
   CSSReset,
@@ -48,7 +50,9 @@ const App = ({ Component, pageProps }) => {
     <ThemeProvider theme={theme}>
       <ColorModeProvider value="light">
         <GlobalStyle>
-          <Component {...pageProps} />
+          <StoreProvider store={store}>
+            <Component {...pageProps} />
+          </StoreProvider>
         </GlobalStyle>
       </ColorModeProvider>
     </ThemeProvider>

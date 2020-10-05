@@ -12,6 +12,8 @@ import {
   Icon,
 } from "@chakra-ui/core";
 
+import { useStoreActions, useStoreState } from "easy-peasy";
+
 import Container from "../components/Container";
 import ReportCard from "../components/ReportCard";
 import Tags from "../components/Tags";
@@ -19,13 +21,15 @@ import getReports from "../utils/reporting";
 
 const title = "Medmail";
 
-const Dashboard = ({ reports }) => {
+const Dashboard = () => {
   const [searchValue, setSearchValue] = useState("");
   const { colorMode } = useColorMode();
   const secondaryTextColor = {
     light: "gray.700",
     dark: "gray.400",
   };
+
+  const reports = useStoreState((state) => state.reports.data);
 
   const filteredReports = reports.filter((report) =>
     report.body.toLowerCase().includes(searchValue.toLowerCase())
@@ -100,13 +104,6 @@ const Dashboard = ({ reports }) => {
       </Container>
     </>
   );
-};
-
-Dashboard.getInitialProps = async (ctx) => {
-  const reports = await getReports();
-  return {
-    reports,
-  };
 };
 
 export default Dashboard;

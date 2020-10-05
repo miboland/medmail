@@ -34,7 +34,7 @@ const Container = ({ children }) => {
       <StickyNav
         flexDirection="row"
         justifyContent="space-between"
-        alignItems="center"
+        alignItems="auto"
         maxWidth="900px"
         width="100%"
         bg={navBgColor[colorMode]}
@@ -50,21 +50,6 @@ const Container = ({ children }) => {
           onClick={toggleColorMode}
         />
         <Box>
-          {/* <NextLink href="/dashboard" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
-              Dashboard
-            </Button>
-          </NextLink> */}
-          {/* <NextLink href="/blog" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
-              Blog
-            </Button>
-          </NextLink>
-          <NextLink href="/about" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
-              About
-            </Button>
-          </NextLink> */}
           <NextLink href="/" passHref>
             <Button as="a" variant="ghost" p={[1, 4]}>
               Home

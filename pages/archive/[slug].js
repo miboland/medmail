@@ -8,6 +8,10 @@ import {
   Box,
   Icon,
   Button,
+  Tag,
+  TagIcon,
+  TagLabel,
+  TagCloseButton,
 } from "@chakra-ui/core";
 import { NextSeo } from "next-seo";
 
@@ -16,11 +20,12 @@ import NextLink from "next/link";
 
 import Container from "../../components/Container";
 import Pagination from "../../components/Pagination";
-import getReports from "../../utils/reporting";
+
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const title = "Medmail";
 
-const Report = ({ reports }) => {
+const Report = () => {
   const router = useRouter();
   const { slug } = router.query;
   const query = router.query.q ? router.query.q : null;
@@ -31,8 +36,17 @@ const Report = ({ reports }) => {
     dark: "gray.400",
   };
 
+  const reports = useStoreState((state) => state.reports.data);
+  const removeTag = useStoreActions((actions) => actions.reports.removeTag);
+
+  const removeReportTag = async (e, tag, title) => {
+    e.preventDefault();
+    const report = reports.find((report) => report.title === title);
+    removeTag({ report, tag });
+  };
+
   const report = reports.find((report) => report.title === slug);
-  const { body } = report;
+  const { body, tags } = report;
 
   const filteredReports = query
     ? reports.filter((report) =>
@@ -65,7 +79,18 @@ const Report = ({ reports }) => {
             mt={8}
           >
             <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
-              {slug.charAt(0).toUpperCase() + slug.slice(1)}
+              {tags.map((tag, i) => {
+                return (
+                  <Tag size="sm" variantColor={tag.color} mr={2} key={i} mb={4}>
+                    <TagIcon icon={tag.icon} size="12px" />
+                    <TagLabel>{tag.title}</TagLabel>
+                    <TagCloseButton
+                      onClick={(e) => removeReportTag(e, tag, slug)}
+                    />
+                  </Tag>
+                );
+              })}
+              <Flex>{slug.charAt(0).toUpperCase() + slug.slice(1)}</Flex>
             </Heading>
             <Box minHeight="200px">
               <Text>{body}</Text>
@@ -97,13 +122,6 @@ const Report = ({ reports }) => {
       </Container>
     </>
   );
-};
-
-Report.getInitialProps = async (ctx) => {
-  const reports = await getReports();
-  return {
-    reports,
-  };
 };
 
 export default Report;

@@ -102,7 +102,7 @@ const contents = [
   report50,
 ];
 
-const getReports = async () => {
+const getReports = () => {
   const arr = [];
   for (let i = 0; i < 50; i++) {
     arr.push({
