@@ -82,9 +82,16 @@ const Dashboard = ({ reports }) => {
                 `Reports Containing "${searchValue}"`}
               {filteredReports.length === reports.length && "All Reports"}
             </Heading>
+            <Text color={secondaryTextColor[colorMode]} mb={2}>
+              {`${filteredReports.length} Results`}
+            </Text>
             {!filteredReports.length && "No reports found."}
             {filteredReports.map((report) => (
-              <ReportCard key={report.title} {...report} />
+              <ReportCard
+                key={report.title}
+                report={report}
+                searchValue={searchValue}
+              />
             ))}
           </Flex>
         </Stack>

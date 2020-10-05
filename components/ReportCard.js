@@ -11,7 +11,11 @@ import {
 
 import NextLink from "next/link";
 
-const ProjectCard = ({ title, body }) => {
+const ProjectCard = ({ report, searchValue }) => {
+  const { title, body } = report;
+  const route = searchValue
+    ? `archive/${title}?q=${searchValue}`
+    : `archive/${title}`;
   const { colorMode } = useColorMode();
   const borderColor = {
     light: "gray.200",
@@ -23,7 +27,7 @@ const ProjectCard = ({ title, body }) => {
   };
 
   return (
-    <NextLink href={`archive/[slug]`} as={`archive/${title}`} passHref>
+    <NextLink href={`archive/[slug]?q=${searchValue}`} as={route} passHref>
       <Link
         as="a"
         mb={4}
