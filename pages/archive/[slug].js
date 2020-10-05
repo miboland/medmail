@@ -25,7 +25,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 
 const title = "Medmail";
 
-const Report = () => {
+const ReportPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const query = router.query.q ? router.query.q : null;
@@ -46,8 +46,8 @@ const Report = () => {
   };
 
   const report = reports.find((report) => report.title === slug);
-  console.log(report);
-  const { body, tags } = report;
+  const body = report?.body;
+  const tags = report?.tags;
 
   const filteredReports = query
     ? reports.filter((report) =>
@@ -80,22 +80,33 @@ const Report = () => {
             mt={8}
           >
             <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
-              {tags.map((tag, i) => {
-                return (
-                  <Tag size="sm" variantColor={tag.color} mr={2} key={i} mb={4}>
-                    <TagIcon icon={tag.icon} size="12px" />
-                    <TagLabel>{tag.title}</TagLabel>
-                    <TagCloseButton
-                      onClick={(e) => removeReportTag(e, tag, slug)}
-                    />
-                  </Tag>
-                );
-              })}
-              <Flex>{slug.charAt(0).toUpperCase() + slug.slice(1)}</Flex>
+              {tags &&
+                tags.map((tag, i) => {
+                  return (
+                    <Tag
+                      size="sm"
+                      variantColor={tag.color}
+                      mr={2}
+                      key={i}
+                      mb={4}
+                    >
+                      <TagIcon icon={tag.icon} size="12px" />
+                      <TagLabel>{tag.title}</TagLabel>
+                      <TagCloseButton
+                        onClick={(e) => removeReportTag(e, tag, slug)}
+                      />
+                    </Tag>
+                  );
+                })}
+              {slug && (
+                <Flex>{slug.charAt(0).toUpperCase() + slug.slice(1)}</Flex>
+              )}
             </Heading>
-            <Box minHeight="200px">
-              <Text>{body}</Text>
-            </Box>
+            {body && (
+              <Box minHeight="200px">
+                <Text>{body}</Text>
+              </Box>
+            )}
             {query && (
               <Box mt={10}>
                 <Text color={secondaryTextColor[colorMode]}>
@@ -125,4 +136,4 @@ const Report = () => {
   );
 };
 
-export default Report;
+export default ReportPage;
