@@ -46,6 +46,7 @@ const Report = () => {
   };
 
   const report = reports.find((report) => report.title === slug);
+  console.log(report);
   const { body, tags } = report;
 
   const filteredReports = query

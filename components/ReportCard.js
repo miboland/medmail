@@ -88,7 +88,7 @@ function ReportCard({ report, searchValue }) {
                   mt={2}
                   letterSpacing="tighter"
                 >
-                  {title}
+                  {title.charAt(0).toUpperCase() + title.slice(1)}
                 </Heading>
                 <Text lineHeight="1.3">{body}</Text>
               </Draggable>

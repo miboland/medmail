@@ -12,12 +12,11 @@ import {
   Icon,
 } from "@chakra-ui/core";
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 
 import Container from "../components/Container";
 import ReportCard from "../components/ReportCard";
 import Tags from "../components/Tags";
-import getReports from "../utils/reporting";
 
 const title = "Medmail";
 
