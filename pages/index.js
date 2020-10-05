@@ -14,6 +14,7 @@ import {
 
 import Container from "../components/Container";
 import ReportCard from "../components/ReportCard";
+import Tags from "../components/Tags";
 import getReports from "../utils/reporting";
 
 const title = "Medmail";
@@ -82,6 +83,7 @@ const Dashboard = ({ reports }) => {
                 `Reports Containing "${searchValue}"`}
               {filteredReports.length === reports.length && "All Reports"}
             </Heading>
+            <Tags />
             <Text color={secondaryTextColor[colorMode]} mb={2}>
               {`${filteredReports.length} Results`}
             </Text>

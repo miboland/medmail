@@ -6,10 +6,8 @@ import {
   Flex,
   Stack,
   Box,
-  Link,
   Icon,
   Button,
-  Divider,
 } from "@chakra-ui/core";
 import { NextSeo } from "next-seo";
 

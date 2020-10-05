@@ -108,6 +108,7 @@ const getReports = async () => {
     arr.push({
       title: `report-${i + 1}`,
       body: contents[i],
+      tags: [],
     });
   }
   return arr;

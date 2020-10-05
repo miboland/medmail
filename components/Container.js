@@ -25,8 +25,8 @@ const Container = ({ children }) => {
     dark: "white",
   };
   const navBgColor = {
-    light: "rgba(255, 255, 255, 0.8)",
-    dark: "rgba(23, 25, 35, 0.8)",
+    light: "rgba(255, 255, 255, 1)",
+    dark: "rgba(23, 25, 35, 1)",
   };
 
   return (

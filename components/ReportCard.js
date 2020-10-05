@@ -43,14 +43,6 @@ const ProjectCard = ({ report, searchValue }) => {
           borderRadius={4}
           p={4}
         >
-          {/* <Icon
-          aria-label="LinkedIn"
-          name={icon}
-          color={iconColor[colorMode]}
-          size="32px"
-          ml={2}
-          mr={4}
-        /> */}
           <Stack>
             <Heading
               as="h4"
