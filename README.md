@@ -1,3 +1,5 @@
+## Medmail
+
 [medmail.vercel.app](https://medmail.vercel.app)
 
 ## Getting Started
