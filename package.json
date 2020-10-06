@@ -1,7 +1,8 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
-  "private": true,
+  "name": "medmail",
+  "description": "The Medmail website.",
+  "version": "1.0.0",
+  "author": "Michael Boland <michael@boland.onl>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

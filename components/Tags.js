@@ -64,7 +64,7 @@ const Tags = () => {
         <Box>
           <Flex>
             <Text mr={1}>Draggable Tags</Text>
-            <Text fontSize="sm">(drag to report titles)</Text>
+            <Text fontSize="sm">(drop above report titles)</Text>
           </Flex>
           <Divider></Divider>
           <Container
