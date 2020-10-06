@@ -1,6 +1,6 @@
 ## Medmail
 
-[medmail.vercel.app](https://medmail.vercel.app)
+A document search and tagging manager.
 
 ## Getting Started
 
