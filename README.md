@@ -1,6 +1,6 @@
 ## Medmail
 
-A document search and tagging manager.
+A document search and tagging manager. MacOS desktop version available at [Medmailectron](https://github.com/miboland/medmailectron).
 
 ## Running Locally
 
