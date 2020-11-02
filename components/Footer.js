@@ -4,12 +4,12 @@ import { Flex, Link, IconButton } from "@chakra-ui/core";
 const Footer = () => (
   <Flex justify="center" mb={4}>
     <Link
-      href="https://drive.google.com/uc?export=download&id=1fQ0PCb4IxPwfPE818GOSJ3FvCoBGFV_Y"
-      title="Electron"
+      href="https://github.com/miboland/medmailectron"
+      title="Download"
       isExternal
     >
       <IconButton
-        aria-label="Electron"
+        aria-label="Download"
         icon="download"
         size="lg"
         color="gray.500"
